@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Schedule • College Event Manager</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="branding">
+          <div class="logo-mark">CEM</div>
+          <a class="site-title" href="./">College Event Manager</a>
+        </div>
+        <nav class="nav" id="siteNav">
+          <a class="nav-link" href="./">Home</a>
+          <a class="nav-link" href="events.html">Events</a>
+          <a class="nav-link active" href="schedule.html">Schedule</a>
+          <a class="nav-link" href="speakers.html">Speakers</a>
+          <a class="nav-link" href="sponsors.html">Sponsors</a>
+          <a class="nav-link" href="gallery.html">Gallery</a>
+          <a class="nav-link" href="students.html">Students</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Event Schedule</h1>
+      <p class="page-intro">Responsive timetable for the event day.</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>Time</th><th>Session</th><th>Speaker</th><th>Venue</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>09:00</td><td>Registration & Breakfast</td><td>-</td><td>Lobby</td></tr>
+          <tr><td>10:00</td><td>Opening Keynote</td><td>Anna Kapoor</td><td>Main Auditorium</td></tr>
+          <tr><td>11:30</td><td>AI Trends in 2025</td><td>Ravi Sharma</td><td>Seminar Hall B</td></tr>
+          <tr><td>13:00</td><td>Lunch</td><td>-</td><td>Food Court</td></tr>
+          <tr><td>14:00</td><td>Design for Education</td><td>Sara Khan</td><td>Lab 3</td></tr>
+          <tr><td>16:00</td><td>Hackathon Kickoff</td><td>Committee</td><td>Auditorium</td></tr>
+        </tbody>
+      </table>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> College Event Manager</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+      document.getElementById('navToggle').addEventListener('click', ()=> document.getElementById('siteNav').classList.toggle('open'));
+    </script>
+  </body>
+  </html>
+
+

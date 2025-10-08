@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Students • College Event Manager</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="branding">
+          <div class="logo-mark">CEM</div>
+          <a class="site-title" href="./">College Event Manager</a>
+        </div>
+        <nav class="nav" id="siteNav">
+          <a class="nav-link" href="./">Home</a>
+          <a class="nav-link" href="events.html">Events</a>
+          <a class="nav-link" href="schedule.html">Schedule</a>
+          <a class="nav-link" href="speakers.html">Speakers</a>
+          <a class="nav-link" href="sponsors.html">Sponsors</a>
+          <a class="nav-link" href="gallery.html">Gallery</a>
+          <a class="nav-link active" href="students.html">Students</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Students</h1>
+      <div class="toolbar">
+        <div class="controls">
+          <input id="studentSearch" type="search" placeholder="Search by name or course" />
+        </div>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Course</th><th>Year</th></tr>
+        </thead>
+        <tbody id="studentsBody"></tbody>
+      </table>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> College Event Manager</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+      document.getElementById('navToggle').addEventListener('click', ()=> document.getElementById('siteNav').classList.toggle('open'));
+      const bodyEl = document.getElementById('studentsBody');
+      const searchEl = document.getElementById('studentSearch');
+      let students = [];
+      (async function(){
+        try { students = await fetchJson('data/students.json'); render(); }
+        catch(e) { bodyEl.innerHTML = '<tr><td colspan="4">Failed to load students.</td></tr>'; }
+      })();
+      searchEl.addEventListener('input', render);
+      function render(){
+        const q = searchEl.value.toLowerCase();
+        const rows = students.filter(s => !q || s.name.toLowerCase().includes(q) || s.course.toLowerCase().includes(q));
+        bodyEl.innerHTML = rows.map(s => `<tr><td>${escapeHtml(s.id)}</td><td>${escapeHtml(s.name)}</td><td>${escapeHtml(s.course)}</td><td>${escapeHtml(String(s.year))}</td></tr>`).join('');
+      }
+    </script>
+  </body>
+  </html>
+
+

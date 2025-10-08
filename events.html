@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Events • College Event Manager</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="branding">
+          <div class="logo-mark">CEM</div>
+          <a class="site-title" href="./">College Event Manager</a>
+        </div>
+        <nav class="nav" id="siteNav">
+          <a class="nav-link" href="./">Home</a>
+          <a class="nav-link active" href="events.html">Events</a>
+          <a class="nav-link" href="schedule.html">Schedule</a>
+          <a class="nav-link" href="speakers.html">Speakers</a>
+          <a class="nav-link" href="sponsors.html">Sponsors</a>
+          <a class="nav-link" href="gallery.html">Gallery</a>
+          <a class="nav-link" href="students.html">Students</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">All Events</h1>
+      <p class="page-intro">Browse and filter events. Click Register on the home page to save your spot.</p>
+      <div class="toolbar">
+        <div class="controls">
+          <input id="searchInput" type="search" placeholder="Search events..." />
+          <select id="tagFilter">
+            <option value="">All Tags</option>
+          </select>
+        </div>
+      </div>
+      <ul class="card-list" id="eventsList"></ul>
+      <div class="pagination" id="pagination"></div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> College Event Manager</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+      const state = { page: 1, perPage: 6, search: "", tag: "", events: [] };
+      const listEl = document.getElementById('eventsList');
+      const paginationEl = document.getElementById('pagination');
+      const searchInput = document.getElementById('searchInput');
+      const tagFilter = document.getElementById('tagFilter');
+
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+      document.getElementById('navToggle').addEventListener('click', ()=> document.getElementById('siteNav').classList.toggle('open'));
+
+      (async function init(){
+        try {
+          const events = await fetchJson('data/events.json');
+          state.events = events;
+          hydrateTagFilter(events);
+          render();
+        } catch(e) {
+          listEl.innerHTML = '<li class="card">Failed to load events.</li>';
+        }
+      })();
+
+      function hydrateTagFilter(events){
+        const tags = Array.from(new Set(events.flatMap(e => e.tags || []))).sort();
+        for(const t of tags){
+          const opt = document.createElement('option');
+          opt.value = t; opt.textContent = t; tagFilter.appendChild(opt);
+        }
+      }
+
+      searchInput.addEventListener('input', () => { state.search = searchInput.value; state.page = 1; render(); });
+      tagFilter.addEventListener('change', () => { state.tag = tagFilter.value; state.page = 1; render(); });
+
+      function render(){
+        const filtered = state.events.filter(ev =>
+          (!state.search || ev.title.toLowerCase().includes(state.search.toLowerCase())) &&
+          (!state.tag || (ev.tags||[]).includes(state.tag))
+        );
+        const totalPages = Math.max(1, Math.ceil(filtered.length / state.perPage));
+        if (state.page > totalPages) state.page = totalPages;
+        const start = (state.page - 1) * state.perPage;
+        const items = filtered.slice(start, start + state.perPage);
+
+        listEl.innerHTML = items.map(ev => `
+          <li class="card">
+            <img src="${escapeAttr(ev.image || '')}" alt="${escapeAttr(ev.title)}" />
+            <h3>${escapeHtml(ev.title)}</h3>
+            <div class="meta">${escapeHtml(ev.date)} • ${escapeHtml(ev.venue || 'TBA')}</div>
+            <div>${(ev.tags||[]).map(t=>`<span class=\"tag\">${escapeHtml(t)}</span>`).join(' ')}</div>
+          </li>`).join('');
+
+        renderPagination(totalPages);
+      }
+
+      function renderPagination(total){
+        paginationEl.innerHTML = '';
+        for(let i=1;i<=total;i++){
+          const btn = document.createElement('button');
+          btn.className = 'page-btn' + (i===state.page?' active':'');
+          btn.textContent = String(i);
+          btn.addEventListener('click', ()=>{ state.page = i; render(); });
+          paginationEl.appendChild(btn);
+        }
+      }
+    </script>
+  </body>
+  </html>
+
+

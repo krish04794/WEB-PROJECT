@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>College Event Manager</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="branding">
+          <div class="logo-mark">CEM</div>
+          <a class="site-title" href="./">College Event Manager</a>
+        </div>
+        <nav class="nav" id="siteNav">
+          <a class="nav-link active" href="./">Home</a>
+          <a class="nav-link" href="events.html">Events</a>
+          <a class="nav-link" href="schedule.html">Schedule</a>
+          <a class="nav-link" href="speakers.html">Speakers</a>
+          <a class="nav-link" href="sponsors.html">Sponsors</a>
+          <a class="nav-link" href="gallery.html">Gallery</a>
+          <a class="nav-link" href="students.html">Students</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+          <a class="nav-link" href="login.html">Login</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1>Manage and Register for College Events with Ease</h1>
+            <p>Discover upcoming events, view schedules, meet speakers, and register seamlessly. Built for your practical submission and real use on campus.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#register">Register Now</a>
+              <a class="btn btn-outline" href="#events">View Events</a>
+            </div>
+          </div>
+          <aside class="hero-card">
+            <h3>What you can do</h3>
+            <ul class="checklist">
+              <li>Browse events and filter by category</li>
+              <li>Register and save your seat</li>
+              <li>See schedule and speaker info</li>
+              <li>Explore gallery and sponsors</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="events" class="features">
+        <div class="container">
+          <h2 class="page-title">Upcoming Events</h2>
+          <p class="page-intro">Hand-picked events happening this semester.</p>
+          <ul class="card-list" id="eventList">
+            <li class="card skeleton">
+              <div class="sk-line" style="width: 70%"></div>
+              <div class="sk-line short"></div>
+              <div class="sk-line" style="width: 90%"></div>
+            </li>
+            <li class="card skeleton">
+              <div class="sk-line" style="width: 60%"></div>
+              <div class="sk-line short"></div>
+              <div class="sk-line" style="width: 80%"></div>
+            </li>
+            <li class="card skeleton">
+              <div class="sk-line" style="width: 65%"></div>
+              <div class="sk-line short"></div>
+              <div class="sk-line" style="width: 75%"></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="register" class="features">
+        <div class="container">
+          <h2 class="page-title">Register Your Interest</h2>
+          <p class="page-intro">Quick form to save your spot. Data saved locally.</p>
+          <form id="registerForm" class="form" novalidate>
+            <div class="form-row">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" name="fullName" type="text" required />
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+            <div class="form-row">
+              <label for="eventSelect">Select Event</label>
+              <select id="eventSelect" name="eventId" required>
+                <option value="" disabled selected>Choose an event</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> College Event Manager</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/site.js"></script>
+    <script src="assets/js/auth.js"></script>
+  </body>
+  </html>
+
+

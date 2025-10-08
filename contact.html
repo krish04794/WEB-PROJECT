@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact • College Event Manager</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="branding">
+          <div class="logo-mark">CEM</div>
+          <a class="site-title" href="./">College Event Manager</a>
+        </div>
+        <nav class="nav" id="siteNav">
+          <a class="nav-link" href="./">Home</a>
+          <a class="nav-link" href="events.html">Events</a>
+          <a class="nav-link" href="schedule.html">Schedule</a>
+          <a class="nav-link" href="speakers.html">Speakers</a>
+          <a class="nav-link" href="sponsors.html">Sponsors</a>
+          <a class="nav-link" href="gallery.html">Gallery</a>
+          <a class="nav-link" href="students.html">Students</a>
+          <a class="nav-link active" href="contact.html">Contact</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Contact Us</h1>
+      <div class="grid-3">
+        <section class="feature">
+          <h3>Event Committee</h3>
+          <p>Email: events@college.edu<br/>Phone: +91 98765 43210</p>
+        </section>
+        <section class="feature">
+          <h3>Location</h3>
+          <p>123 Campus Road, City - 000000</p>
+        </section>
+        <section class="feature">
+          <h3>Follow Us</h3>
+          <p><a class="link" href="#">Instagram</a> · <a class="link" href="#">Twitter</a> · <a class="link" href="#">Facebook</a></p>
+        </section>
+      </div>
+
+      <h2 class="page-title">Send a Message</h2>
+      <form id="contactForm" class="form" novalidate>
+        <div class="form-row">
+          <label for="cname">Name</label>
+          <input id="cname" required />
+        </div>
+        <div class="form-row">
+          <label for="cemail">Email</label>
+          <input id="cemail" type="email" required />
+        </div>
+        <div class="form-row">
+          <label for="cmsg">Message</label>
+          <textarea id="cmsg" rows="4" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Send</button>
+        </div>
+      </form>
+
+      <div class="feature" style="margin-top:16px;">
+        <h3>Map</h3>
+        <div style="background:#e9eef5; height:280px; border-radius:12px; display:flex; align-items:center; justify-content:center; color:#4a5864;">Map placeholder</div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> College Event Manager</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+      document.getElementById('navToggle').addEventListener('click', ()=> document.getElementById('siteNav').classList.toggle('open'));
+      document.getElementById('contactForm').addEventListener('submit', (e)=>{
+        e.preventDefault();
+        alert('Thanks! Your message has been recorded for demo.');
+        e.target.reset();
+      });
+    </script>
+  </body>
+  </html>
+
+

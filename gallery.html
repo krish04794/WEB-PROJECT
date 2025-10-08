@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gallery • College Event Manager</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .gallery-grid img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; box-shadow: var(--shadow); cursor: zoom-in; }
+      @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 560px) { .gallery-grid { grid-template-columns: 1fr; } }
+      .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; }
+      .lightbox.open { display: flex; }
+      .lightbox img { max-width: 90vw; max-height: 80vh; border-radius: 10px; }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="branding">
+          <div class="logo-mark">CEM</div>
+          <a class="site-title" href="./">College Event Manager</a>
+        </div>
+        <nav class="nav" id="siteNav">
+          <a class="nav-link" href="./">Home</a>
+          <a class="nav-link" href="events.html">Events</a>
+          <a class="nav-link" href="schedule.html">Schedule</a>
+          <a class="nav-link" href="speakers.html">Speakers</a>
+          <a class="nav-link" href="sponsors.html">Sponsors</a>
+          <a class="nav-link active" href="gallery.html">Gallery</a>
+          <a class="nav-link" href="students.html">Students</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1 class="page-title">Gallery</h1>
+      <div class="gallery-grid" id="gallery"></div>
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+        <img id="lightboxImg" alt="Preview" />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> College Event Manager</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+      document.getElementById('navToggle').addEventListener('click', ()=> document.getElementById('siteNav').classList.toggle('open'));
+      (async function(){
+        try {
+          const imgs = await fetchJson('data/gallery.json');
+          const grid = document.getElementById('gallery');
+          grid.innerHTML = imgs.map(i => `<img src="${escapeAttr(i.src)}" alt="${escapeAttr(i.alt)}" />`).join('');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
+          grid.addEventListener('click', (e)=>{
+            const t = e.target; if (t.tagName === 'IMG') { lightboxImg.src = t.src; lightbox.classList.add('open'); }
+          });
+          lightbox.addEventListener('click', ()=> lightbox.classList.remove('open'));
+        } catch(e) {
+          document.getElementById('gallery').innerHTML = '<p>Failed to load gallery.</p>';
+        }
+      })();
+    </script>
+  </body>
+  </html>
+
+
