@@ -1,0 +1,7 @@
+[
+  { "id": "spn-microsoft", "name": "Microsoft", "logo": "https://images.unsplash.com/photo-1524169113253-c6ba17f68498?w=600&auto=format&fit=crop&q=60", "tier": "Platinum" },
+  { "id": "spn-google", "name": "Google", "logo": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&auto=format&fit=crop&q=60", "tier": "Gold" },
+  { "id": "spn-aws", "name": "AWS", "logo": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop&q=60", "tier": "Silver" }
+]
+
+

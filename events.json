@@ -1,0 +1,28 @@
+[
+  {
+    "id": "hackathon",
+    "title": "Annual Hackathon",
+    "date": "2025-10-20",
+    "venue": "Main Auditorium",
+    "image": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=1200&auto=format&fit=crop&q=60",
+    "tags": ["Coding", "Team", "24h"]
+  },
+  {
+    "id": "tech-talk-ai",
+    "title": "Tech Talk: AI in 2025",
+    "date": "2025-10-25",
+    "venue": "Seminar Hall B",
+    "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=60",
+    "tags": ["AI", "ML", "Talk"]
+  },
+  {
+    "id": "design-workshop",
+    "title": "UI/UX Design Workshop",
+    "date": "2025-11-02",
+    "venue": "Lab 3",
+    "image": "https://images.unsplash.com/photo-1587614203976-365c74645e83?w=1200&auto=format&fit=crop&q=60",
+    "tags": ["Design", "Workshop"]
+  }
+]
+
+

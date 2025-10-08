@@ -1,0 +1,7 @@
+[
+  { "id": "stu-1001", "name": "Priya Verma", "course": "B.Tech CSE", "year": 3 },
+  { "id": "stu-1002", "name": "Aditya Rao", "course": "BCA", "year": 2 },
+  { "id": "stu-1003", "name": "Neha Singh", "course": "B.Tech IT", "year": 4 }
+]
+
+
